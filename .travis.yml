@@ -3,8 +3,14 @@ language: cpp
 compiler: clang
 addons:
   apt:
+    sources:
+    - deadsnakes
     packages:
     - libboost-test-dev
+    - python3.9
+install:
+- pip install conan
+- conan user
 script:
 - cmake .
 - cmake --build .
