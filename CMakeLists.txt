@@ -20,16 +20,16 @@ add_executable(range "ip_filter.cpp")
 
 add_library(ip_filter_lib "lib.cpp")
 
-add_executable(test_ip_filter "test_ip_filter.cpp")
+add_executable(test_range "test_ip_filter.cpp")
 
 set_target_properties(
-	range ip_filter_lib test_ip_filter PROPERTIES
+	range ip_filter_lib test_range PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
 )
 
 set_target_properties(
-	test_ip_filter PROPERTIES
+	test_range PROPERTIES
     COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
     INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
 )
@@ -45,14 +45,14 @@ target_link_libraries(
 )
 
 target_link_libraries(
-	test_ip_filter
+	test_range
     ${Boost_LIBRARIES}
     ip_filter_lib
 )
 
 enable_testing()
 
-add_test(ip_filter_tests test_ip_filter)
+add_test(ip_filter_tests test_range)
 
 install(TARGETS range RUNTIME DESTINATION bin)
 

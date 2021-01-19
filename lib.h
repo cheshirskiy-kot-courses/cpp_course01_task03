@@ -34,10 +34,11 @@ IP_Pool filter(IP_Pool ip_pool, Bytes... bytes)
     
     IP_Pool res;
 
+    using namespace ranges;
     ranges::for_each(ip_pool | ranges::views::filter(
         [&b](const IP & ip)
             {
-                return ranges::equal(ip.cbegin(), ip.cbegin() + b.size(), b.cbegin());
+                return equal(ip | views::take(b.size()), b | views::take(b.size()));
             }),
         [&res](const IP & ip) { res.push_back(ip); });
 

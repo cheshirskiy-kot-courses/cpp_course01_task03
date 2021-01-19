@@ -47,13 +47,16 @@ IP_Pool filter_any(IP_Pool ip_pool, uint8_t byte)
 {
     IP_Pool res;
 
-    ranges::for_each(ip_pool | ranges::views::filter(
-        [byte](const IP & ip)
-            {
-                return ranges::any_of(ip,
-                    [byte](uint8_t ip_part) { return ip_part == byte; });
-            }),
-        [&res](const IP & ip) { res.push_back(ip); });
+    using namespace ranges;
+    for_each(
+        ip_pool
+        | views::filter(
+            [byte](const IP & ip)
+                {
+                    return any_of(ip,
+                        [byte](uint8_t ip_part) { return ip_part == byte; });
+                }),
+            [&res](const IP & ip) { res.push_back(ip); });
 
     return res;
 }
