@@ -16,14 +16,14 @@ conan_basic_setup(TARGETS)
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 
-add_executable(range "ip_filter.cpp")
+add_executable(range "range.cpp")
 
-add_library(ip_filter_lib "lib.cpp")
+add_library(range_lib "lib.cpp")
 
-add_executable(test_range "test_ip_filter.cpp")
+add_executable(test_range "test_range.cpp")
 
 set_target_properties(
-	range ip_filter_lib test_range PROPERTIES
+	range range_lib test_range PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
 )
@@ -35,24 +35,20 @@ set_target_properties(
 )
 
 target_link_libraries(
-    ip_filter_lib
+    range_lib
     CONAN_PKG::range-v3
 )
 
 target_link_libraries(
     range
-    ip_filter_lib
+    range_lib
 )
 
 target_link_libraries(
 	test_range
     ${Boost_LIBRARIES}
-    ip_filter_lib
+    range_lib
 )
-
-enable_testing()
-
-add_test(ip_filter_tests test_range)
 
 install(TARGETS range RUNTIME DESTINATION bin)
 
@@ -67,3 +63,7 @@ set(CPACK_PACKAGE_CONTACT cheshirskiy-kot-courses@yandex.com)
 set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 
 include(CPack)
+
+enable_testing()
+
+add_test(range_tests test_range)

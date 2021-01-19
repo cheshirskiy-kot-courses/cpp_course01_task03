@@ -1,10 +1,10 @@
-#define BOOST_TEST_MODULE ip_filter_test_module
+#define BOOST_TEST_MODULE range_test_module
 
 #include "lib.h"
 
 #include <boost/test/unit_test.hpp>
 
-BOOST_AUTO_TEST_SUITE(ip_filter_test_suite)
+BOOST_AUTO_TEST_SUITE(range_test_suite)
 
 using namespace std;
 

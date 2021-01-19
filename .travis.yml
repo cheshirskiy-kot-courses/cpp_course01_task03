@@ -5,7 +5,6 @@ addons:
   apt:
     packages:
     - libboost-test-dev
-    - python3
 install:
 - pip install conan
 script:
