@@ -8,8 +8,7 @@ set(Boost_USE_STATIC_LIBS OFF)
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 execute_process(
-    COMMAND conan install -if ${CMAKE_BINARY_DIR} .
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMAND conan install ${CMAKE_CURRENT_SOURCE_DIR}
 )
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
@@ -66,4 +65,8 @@ include(CPack)
 
 enable_testing()
 
-add_test(range_tests test_range)
+add_test(
+    NAME range_tests
+    COMMAND test_range
+    WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+)
